@@ -5,7 +5,7 @@ const ChatBooth = () => {
   const [message, setMessage] = useState('');
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col " id="chatbooth-section">
       {/* Header */}
       <div className="flex items-center justify-between bg-gray-800/50 backdrop-blur-lg p-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold tracking-tight">JIVIKA</h1>

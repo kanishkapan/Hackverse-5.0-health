@@ -8,6 +8,8 @@ import Navbar from "./components/Footer/Navbar";
 import AibotPage from "../src/pages/AiBot";
 import ContactPage from "../src/pages/ContactPage";
 import LandingPage from "../src/pages/LandingPage";
+import BlogPage from "./pages/BlogPage";
+import BlogPostPage from "./pages/BlogPostPage";
 
 
 const App = () => {
@@ -25,6 +27,9 @@ const App = () => {
 
         {/* Contact Page */}
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blogpost" element={<BlogPostPage />} />
+        
 
        
       </Routes>

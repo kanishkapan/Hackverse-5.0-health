@@ -18,9 +18,19 @@ const Header = () => {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
+  // Handle the button click to scroll to ChatBooth
+  const handleButtonClick = () => {
+    const chatBoothElement = document.getElementById('chatbooth-section');
+    if (chatBoothElement) {
+      chatBoothElement.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-     
       {/* Hero Section */}
       <div className="flex-1 relative bg-navy-900">
         <div
@@ -74,8 +84,11 @@ const Header = () => {
                     <button className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
                       Learn More
                     </button>
-                    <button className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors">
-                      Book Consultation
+                    <button
+                      className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                      onClick={handleButtonClick}
+                    >
+                      Say Hi to Jivika!
                     </button>
                   </motion.div>
                 </motion.div>
