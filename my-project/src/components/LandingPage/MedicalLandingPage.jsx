@@ -10,8 +10,8 @@ const MedicalLandingPage = () => {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <h1 className="text-2xl font-bold">
-            <span className="text-blue-900">MED</span>
-            <span className="text-blue-500">DICAL</span>
+            <span className="text-blue-900">Dr.</span>
+            <span className="text-blue-500">Jivika</span>
           </h1>
         </div>
 

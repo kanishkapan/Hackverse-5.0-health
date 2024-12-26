@@ -10,6 +10,10 @@ import Header from "./components/Aibot/Header";
 import ChatBooth from "./components/Aibot/ChatBooth";
 import AboutPage from "./components/Aibot/AboutPage";
 import Footerai from "./components/Aibot/Footerai";
+import Contact from "./components/Contact/Contact";
+import ResponsiveMap from "./components/Contact/ResposniveMap";
+import ContactForm from "./components/Contact/ContactForm";
+import FooterForContact from "./components/Contact/FooterForContact";
 
 export default function App() {
   return (
@@ -26,6 +30,12 @@ export default function App() {
     <Header/>
     <ChatBooth/>
     <ContactSection/>
+    <Contact/>
+    <ResponsiveMap/>
+    <ContactForm/>
+    <NewsGrid/>
+    <FooterForContact/>
+    
     
    
     

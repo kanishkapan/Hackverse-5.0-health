@@ -1,39 +1,11 @@
 import React from 'react';
 
-const ContactSection = () => {
+const FooterForContact = () => {
   return (
     <footer className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center py-8">
-          <h2 className="text-xl font-semibold text-blue-800">GET IN TOUCH</h2>
-          <h3 className="text-3xl font-bold text-blue-900 mt-2">Contact</h3>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Emergency */}
-          <div className="bg-blue-100 p-6 rounded-lg text-center">
-            <p className="text-blue-900 font-semibold">EMERGENCY</p>
-            <p className="mt-2 text-blue-800">(237) 681-812-255</p>
-            <p className="text-blue-800">(237) 666-331-894</p>
-          </div>
-          {/* Location */}
-          <div className="bg-blue-900 p-6 rounded-lg text-center text-white">
-            <p className="font-semibold">LOCATION</p>
-            <p className="mt-2">0123 Some place</p>
-            <p>9876 Some country</p>
-          </div>
-          {/* Email */}
-          <div className="bg-blue-100 p-6 rounded-lg text-center">
-            <p className="text-blue-900 font-semibold">EMAIL</p>
-            <p className="mt-2 text-blue-800">fildineeesoe@gmail.com</p>
-            <p className="text-blue-800">myebstudios@gmail.com</p>
-          </div>
-          {/* Working Hours */}
-          <div className="bg-blue-100 p-6 rounded-lg text-center">
-            <p className="text-blue-900 font-semibold">WORKING HOURS</p>
-            <p className="mt-2 text-blue-800">Mon-Sat 09:00-20:00</p>
-            <p className="text-blue-800">Sunday Emergency only</p>
-          </div>
-        </div>
+      
+       
 
         <div className="mt-10 bg-blue-900 text-white py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -84,4 +56,4 @@ const ContactSection = () => {
   );
 };
 
-export default ContactSection;
+export default FooterForContact;

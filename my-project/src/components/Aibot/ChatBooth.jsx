@@ -8,7 +8,7 @@ const ChatBooth = () => {
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between bg-gray-800/50 backdrop-blur-lg p-6 border-b border-gray-700">
-        <h1 className="text-2xl font-bold tracking-tight">CHATBOOTH</h1>
+        <h1 className="text-2xl font-bold tracking-tight">JIVIKA</h1>
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-4">
             <Bell className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer" />
