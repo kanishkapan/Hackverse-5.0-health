@@ -52,6 +52,15 @@ const Navbar = () => {
             <li className="hover:underline cursor-pointer">
               <Link to="/contact">Contact</Link>
             </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/blog">Blogs</Link>
+            </li>
+            <li className="hover:underline cursor-pointer">
+              <Link to="/blogpost">Posts</Link>
+            </li>
           </ul>
 
           {/* Search and Appointment */}

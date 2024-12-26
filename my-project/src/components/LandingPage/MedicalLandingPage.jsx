@@ -7,24 +7,42 @@ const MedicalLandingPage = () => {
       {/* Header */}
    
       {/* Hero Section */}
-      <section
-        className="relative bg-cover bg-center h-[500px] md:h-[600px] flex items-center justify-center text-center"
-        style={{
-          backgroundImage:
-            "url('https://via.placeholder.com/1200x800')", // Replace with your image URL
-        }}
+      <div className="relative w-screen h-[85vh] sm:h-[90vh] lg:h-screen overflow-hidden" 
+         style={{ marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
+      <video 
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay 
+        muted 
+        loop 
+        playsInline
       >
-        <div className="absolute inset-0 bg-blue-900 bg-opacity-40"></div>
-        <div className="relative z-10 text-white px-6 md:px-12">
-          <h2 className="text-4xl md:text-5xl font-bold leading-snug">
-            Leading the Way in Medical Excellence
-          </h2>
-          <p className="mt-4 text-lg">Caring for Life</p>
-          <button className="mt-6 bg-blue-500 px-6 py-2 rounded-md hover:bg-blue-600">
-            Our Services
+        <source src="src/assets/40353-425442466_small.mp4" type="video/mp4" />
+      </video>
+
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent"></div>
+
+      <div className="relative flex flex-col items-center justify-center h-full text-center px-4 sm:px-8 text-white">
+        <div className="text-sm text-gray-300 mb-4">
+          <span className="hover:text-gray-100 cursor-pointer">Home</span>
+          <span className="mx-2">/</span>
+          <span>Contact</span>
+        </div>
+
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          Meet Jivika:  Where Tradition<br/> Meets Technology, Naturally.
+        </h1>
+
+        <p className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl">
+        जीविका: योगः, आयुर्वेदः, विज्ञानस्य संगमः।
+        </p>
+
+        <div className="mt-6">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+            Start Your Health Journey
           </button>
         </div>
-      </section>
+      </div>
+    </div>
 
       {/* Appointment Section */}
       <section className="bg-white py-8 px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-6">
