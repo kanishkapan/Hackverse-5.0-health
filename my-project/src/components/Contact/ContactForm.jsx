@@ -28,7 +28,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div className="bg-black min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Contact Form */}
         <div className="bg-blue-900 text-white p-8 rounded-md">
