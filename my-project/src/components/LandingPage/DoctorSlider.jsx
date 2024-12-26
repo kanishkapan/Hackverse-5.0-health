@@ -75,9 +75,7 @@ const DoctorSlider = () => {
                     <i className="fab fa-instagram"></i>
                   </a>
                 </div>
-                <button className="mt-4 bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700">
-                  View Profile
-                </button>
+                
               </div>
             </div>
           </div>
