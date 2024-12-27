@@ -11,6 +11,7 @@ import LandingPage from "../src/pages/LandingPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import PatientForm from "./components/Profile/PatientForm";
+import AppointmentBooking from "./components/Appointment/Appointment";
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blogpost" element={<BlogPostPage />} />
         <Route path="/profile" element={<PatientForm />} />
+        <Route path="/Appointment" element={<AppointmentBooking/>} />
      
         
 
