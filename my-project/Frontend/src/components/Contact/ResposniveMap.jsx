@@ -19,7 +19,7 @@ const MapZoomControl = ({ zoomLevel }) => {
 
 const ResponsiveMap = () => {
   const [zoomLevel, setZoomLevel] = useState(13);
-  const position = [51.505, -0.09];
+  const position = [22.6812, 75.8798];
 
   // Custom marker icon setup
   const defaultIcon = new Icon({

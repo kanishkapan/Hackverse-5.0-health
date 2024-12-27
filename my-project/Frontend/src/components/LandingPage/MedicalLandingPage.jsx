@@ -29,7 +29,7 @@ const MedicalLandingPage = () => {
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
-          Meet Jivika:  Where Tradition<br/> Meets Technology, Naturally.
+          Meet Jivika: Bridging Timeless <br/> Ayurveda with Modern Innovation, Naturally.
         </h1>
 
         <p className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl">
