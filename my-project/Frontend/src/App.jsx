@@ -12,6 +12,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import PatientForm from "./components/Profile/PatientForm";
 import AppointmentBooking from "./components/Appointment/Appointment";
+import Medicines from "./pages/Medicines";
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/blogpost" element={<BlogPostPage />} />
         <Route path="/profile" element={<PatientForm />} />
         <Route path="/Appointment" element={<AppointmentBooking/>} />
+        <Route path="/medicines" element={<Medicines/>} />
      
         
 
