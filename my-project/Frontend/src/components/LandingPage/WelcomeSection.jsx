@@ -23,13 +23,35 @@ const WelcomeSection = () => {
       </div>
 
       {/* Image Section */}
-      <div className="relative">
-        <img
-          src="https://via.placeholder.com/1200x600" // Replace with the actual image URL
-          alt="Medical Team"
-          className="w-full object-cover"
-        />
+      <div className="relative w-full h-72 sm:h-96 lg:h-[500px] bg-cover bg-center text-white" 
+      style={{
+        backgroundImage: `url('https://cdn.pixabay.com/photo/2017/05/02/03/41/action-2277292_960_720.jpg')`, // Replace with your image URL
+      }}
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent"></div>
+
+      {/* Content */}
+      <div className="relative flex flex-col items-center justify-center h-full text-center px-4 sm:px-8">
+        {/* Breadcrumbs */}
+        
+
+        {/* Main Heading */}
+        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          Get in Touch with Us
+        </h1>
+
+        {/* Subheading */}
+        <p className="mt-4 text-lg sm:text-xl lg:text-2xl text-gray-300 max-w-3xl">
+          Have questions or need support? Reach out to us, and we'll be happy to assist you. We're here to help!
+        </p>
+
+        {/* Call to Action Button */}
+        
       </div>
+    </div>
+
+
     </section>
   );
 };

@@ -1,0 +1,138 @@
+import React, { useState } from "react";
+
+const LoginPage = () => {
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault(); // Prevent form submission from reloading the page
+
+    // Here, you can implement your login logic, such as checking credentials.
+    // For now, we simulate a successful login after form submission.
+    setLoginSuccess(true);
+
+    // Optionally reset the state after a short delay (for the alert to disappear)
+    setTimeout(() => {
+      setLoginSuccess(false);
+    }, 3000); // Alert disappears after 3 seconds
+  };
+
+  return (
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Left Video Section */}
+      <div className="hidden lg:flex lg:w-1/2 relative">
+        <video
+        src="https://cdn.pixabay.com/video/2024/11/07/240330_tiny.mp4"
+          autoPlay
+          loop
+          muted
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-blue-500/20" /> {/* Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-8 text-white bg-gradient-to-b from-transparent to-black/50">
+          <h2 className="text-3xl font-bold mb-2">Welcome to Jivika</h2>
+          <p className="text-lg">Login to access your personalized healthcare dashboard!</p>
+        </div>
+      </div>
+
+      {/* Right Form Section */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 lg:p-12">
+        <div className="w-full max-w-lg bg-white shadow-xl rounded-md p-8 space-y-6">
+          {/* Header */}
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold">Log In</h1>
+            <p className="text-lg text-gray-600">
+              Access your account and manage your medicine needs with ease!
+            </p>
+          </div>
+
+          {/* Form */}
+          <form className="space-y-6" onSubmit={handleLogin}>
+            {/* Email */}
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                required
+              />
+            </div>
+
+            {/* Log In Button */}
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 font-semibold"
+            >
+              Log In
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">
+                Or log in with
+              </span>
+            </div>
+          </div>
+
+          {/* Social Buttons */}
+          <div className="grid grid-cols-2 gap-4">
+            <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100">
+              Google
+            </button>
+            <button className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-100">
+              Apple
+            </button>
+          </div>
+
+          {/* Footer */}
+          <p className="text-center text-gray-600">
+            Don't have an account?{" "}
+            <a
+              href="/signup"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              Sign Up
+            </a>
+          </p>
+        </div>
+      </div>
+
+      {/* Success Alert */}
+      {loginSuccess && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-8 py-4 rounded-md shadow-lg">
+          <p className="font-semibold">Login Successful!</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default LoginPage;
