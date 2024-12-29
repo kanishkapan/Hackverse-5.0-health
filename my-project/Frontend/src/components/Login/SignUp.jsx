@@ -46,6 +46,23 @@ const SignIn = () => {
 
           {/* Form */}
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Name */}
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                required
+              />
+            </div>
+
             {/* Email */}
             <div className="space-y-2">
               <label
