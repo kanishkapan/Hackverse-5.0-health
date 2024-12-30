@@ -33,6 +33,11 @@ const Appointment = () => {
         body: JSON.stringify(formData),
       });
       
+
+
+
+
+
       if (response.ok) {
         alert("Appointment booked successfully!");
       } else {
