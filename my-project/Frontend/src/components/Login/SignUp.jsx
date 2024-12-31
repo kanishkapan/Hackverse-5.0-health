@@ -1,18 +1,38 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 
-const SignIn = () => {
+const SignUp = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Initialize navigate
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
-    // Simulate successful login
-    setLoginSuccess(true);
+    // Collect form data
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
 
-    // Reset the success alert after 3 seconds
-    setTimeout(() => {
-      setLoginSuccess(false);
-    }, 3000); // Alert disappears after 3 seconds
+    try {
+      // Send data to the backend
+      const response = await axios.post("https://your-backend-url.com/api/signin", data);
+
+      if (response.status === 200) {
+        setLoginSuccess(true); // Show success alert
+        setTimeout(() => {
+          setLoginSuccess(false);
+          navigate("/login"); // Redirect to login page
+        }, 3000); // Alert disappears after 3 seconds
+      }
+    } catch (error) {
+      console.error("Error during sign-in:", error);
+      setErrorMessage(error.response?.data?.message || "Sign-in failed. Please try again.");
+    }
   };
 
   return (
@@ -48,14 +68,12 @@ const SignIn = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Name */}
             <div className="space-y-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                 Name
               </label>
               <input
                 id="name"
+                name="name"
                 type="text"
                 placeholder="Enter your name"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -65,14 +83,12 @@ const SignIn = () => {
 
             {/* Email */}
             <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email Address
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -83,21 +99,16 @@ const SignIn = () => {
             {/* Password */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
-                <button
-                  type="button"
-                  className="text-sm font-medium text-blue-600 hover:underline"
-                >
+                <button type="button" className="text-sm font-medium text-blue-600 hover:underline">
                   Forgot password?
                 </button>
               </div>
               <input
                 id="password"
+                name="password"
                 type="password"
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -120,9 +131,7 @@ const SignIn = () => {
               <div className="w-full border-t border-gray-200" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">
-                Or continue with
-              </span>
+              <span className="px-2 bg-white text-gray-500">Or continue with</span>
             </div>
           </div>
 
@@ -139,10 +148,7 @@ const SignIn = () => {
           {/* Footer */}
           <p className="text-center text-gray-600">
             Don't have an account?{" "}
-            <a
-              href="/signup"
-              className="text-blue-600 hover:underline font-medium"
-            >
+            <a href="/signup" className="text-blue-600 hover:underline font-medium">
               Sign Up
             </a>
           </p>
@@ -155,8 +161,15 @@ const SignIn = () => {
           <p className="font-semibold">Sign In Successful!</p>
         </div>
       )}
+
+      {/* Error Alert */}
+      {errorMessage && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-8 py-4 rounded-md shadow-lg">
+          <p className="font-semibold">{errorMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;

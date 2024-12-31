@@ -1,19 +1,42 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import the hook
 
 const LoginPage = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // Initialize the navigate hook
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form submission from reloading the page
 
-    // Here, you can implement your login logic, such as checking credentials.
-    // For now, we simulate a successful login after form submission.
-    setLoginSuccess(true);
+    // Collect form data
+    const formData = new FormData(e.target);
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
 
-    // Optionally reset the state after a short delay (for the alert to disappear)
-    setTimeout(() => {
-      setLoginSuccess(false);
-    }, 3000); // Alert disappears after 3 seconds
+    try {
+      // Send login data to the backend
+      const response = await axios.post(
+        "https://your-backend-url.com/api/login",
+        data
+      );
+
+      if (response.status === 200) {
+        setLoginSuccess(true); // Show success alert
+        setTimeout(() => {
+          setLoginSuccess(false);
+          navigate("/profile"); // Redirect to Profile page
+        }, 3000); // Hide alert after 3 seconds and navigate
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setErrorMessage(
+        error.response?.data?.message || "An error occurred. Please try again."
+      );
+    }
   };
 
   return (
@@ -21,7 +44,7 @@ const LoginPage = () => {
       {/* Left Video Section */}
       <div className="hidden lg:flex lg:w-1/2 relative">
         <video
-        src="https://cdn.pixabay.com/video/2024/11/07/240330_tiny.mp4"
+          src="https://cdn.pixabay.com/video/2024/11/07/240330_tiny.mp4"
           autoPlay
           loop
           muted
@@ -30,7 +53,9 @@ const LoginPage = () => {
         <div className="absolute inset-0 bg-blue-500/20" /> {/* Overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white bg-gradient-to-b from-transparent to-black/50">
           <h2 className="text-3xl font-bold mb-2">Welcome to Jivika</h2>
-          <p className="text-lg">Login to access your personalized healthcare dashboard!</p>
+          <p className="text-lg">
+            Login to access your personalized healthcare dashboard!
+          </p>
         </div>
       </div>
 
@@ -57,6 +82,7 @@ const LoginPage = () => {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -74,6 +100,7 @@ const LoginPage = () => {
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -129,6 +156,13 @@ const LoginPage = () => {
       {loginSuccess && (
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-8 py-4 rounded-md shadow-lg">
           <p className="font-semibold">Login Successful!</p>
+        </div>
+      )}
+
+      {/* Error Alert */}
+      {errorMessage && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-8 py-4 rounded-md shadow-lg">
+          <p className="font-semibold">{errorMessage}</p>
         </div>
       )}
     </div>
