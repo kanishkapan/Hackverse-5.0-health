@@ -24,7 +24,7 @@ const PatientForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/patient-data", formData);
-      console.log("Data successfully sent to backend:", response.data);
+    
       alert("Form submitted successfully!");
     } catch (error) {
       console.error("Error sending data to backend:", error);

@@ -22,7 +22,7 @@ const Appointment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Send data to the backend in a scalable way
     try {
       const response = await fetch("/api/appointments", {
@@ -32,11 +32,6 @@ const Appointment = () => {
         },
         body: JSON.stringify(formData),
       });
-      
-
-
-
-
 
       if (response.ok) {
         alert("Appointment booked successfully!");
@@ -49,30 +44,33 @@ const Appointment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center animate-fade-in">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Booking Form Section */}
-          <div className="bg-white p-6 shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Book an Appointment</h2>
+          <div className="bg-white p-8 shadow-xl rounded-lg transform transition-transform hover:scale-105 animate-slide-in-left">
+            <h2 className="text-3xl font-bold text-blue-800 mb-4">Book an Appointment</h2>
             <p className="text-gray-600 mb-6">
               Please fill in the form below to book an appointment.
             </p>
-            <form className="grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+            <form
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              onSubmit={handleSubmit}
+            >
               <input
                 type="text"
                 placeholder="Phone Number (required)"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
               />
               <select
                 name="reason"
                 value={formData.reason}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
               >
                 <option value="">Reason for Appointment</option>
@@ -85,7 +83,7 @@ const Appointment = () => {
                 name="preferredDate"
                 value={formData.preferredDate}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
               />
               <input
@@ -93,7 +91,7 @@ const Appointment = () => {
                 name="preferredTime"
                 value={formData.preferredTime}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
               />
               <label className="flex items-center col-span-2">
@@ -102,15 +100,15 @@ const Appointment = () => {
                   name="emergency"
                   checked={formData.emergency}
                   onChange={handleChange}
-                  className="mr-2"
+                  className="mr-3 w-5 h-5 text-blue-600 focus:ring-blue-400 border-gray-300 rounded"
                 />
-                Emergency
+                <span className="text-gray-800">Emergency</span>
               </label>
               <select
                 name="doctor"
                 value={formData.doctor}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
               >
                 <option value="">Doctor (Optional)</option>
                 <option value="Dr. Smith">Dr. Smith</option>
@@ -120,7 +118,7 @@ const Appointment = () => {
                 name="department"
                 value={formData.department}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
               >
                 <option value="">Department (Optional)</option>
                 <option value="Cardiology">Cardiology</option>
@@ -131,11 +129,11 @@ const Appointment = () => {
                 placeholder="Additional Notes (Optional)"
                 value={formData.additionalNotes}
                 onChange={handleChange}
-                className="col-span-2 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+                className="col-span-2 border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
               ></textarea>
               <button
                 type="submit"
-                className="col-span-2 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700"
+                className="col-span-2 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 Submit
               </button>
@@ -143,8 +141,8 @@ const Appointment = () => {
           </div>
 
           {/* Schedule Section */}
-          <div className="bg-blue-700 text-white p-6 shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold mb-6">Schedule Hours</h2>
+          <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 shadow-xl rounded-lg transform transition-transform hover:scale-105 animate-slide-in-right">
+            <h2 className="text-3xl font-bold mb-6">Schedule Hours</h2>
             <ul className="space-y-4">
               <li className="flex justify-between">
                 <span>Monday</span>

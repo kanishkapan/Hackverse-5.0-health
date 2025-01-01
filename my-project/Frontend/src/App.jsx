@@ -32,13 +32,14 @@ const App = () => {
 
         {/* Contact Page */}
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog" element={<BlogPage />} />\
         <Route path="/blogpost" element={<BlogPostPage />} />
         <Route path="/profile" element={<PatientForm />} />
         <Route path="/Appointment" element={<AppointmentBooking/>} />
         <Route path="/medicines" element={<Medicines/>} />
         <Route path="/signup" element={<SignIn/>} />
         <Route path="/login" element={<LoginPage/>} />
+        
      
         
 
