@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../components/Aibot/Header";
 import ChatBooth from "../components/Aibot/ChatBooth";
 import FooterAI from "../components/Aibot/Footerai";
+import VideoControls from "../components/VideoCall/VideoConrols";
+import VideoRoom from "../components/VideoCall/VideoRoom";
 
 
 const AibotPage = () => {
@@ -10,8 +12,10 @@ const AibotPage = () => {
       <Header />
       <ChatBooth />
       <FooterAI />
+      <VideoControls />
+      <VideoRoom />
 
-      
+
  
     </div>
   );
