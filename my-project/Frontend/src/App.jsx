@@ -16,6 +16,7 @@ import Medicines from "./pages/Medicines";
 import Login from "./pages/Login";
 import SignIn from "./components/Login/SignUp";
 import LoginPage from "./components/Login/LoginPage";
+import VideoCall from "./pages/VideoCall";
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/medicines" element={<Medicines/>} />
         <Route path="/signup" element={<SignIn/>} />
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/video-call" element={<VideoCall/>} />
         
      
         
