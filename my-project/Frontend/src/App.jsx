@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import SignIn from "./components/Login/SignUp";
 import LoginPage from "./components/Login/LoginPage";
 import VideoCall from "./pages/VideoCall";
+import LiveChat from "./pages/LiveChat";
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/signup" element={<SignIn/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/video-call" element={<VideoCall/>} />
+        <Route path="/live-chat" element={<LiveChat/>} />
         
      
         
