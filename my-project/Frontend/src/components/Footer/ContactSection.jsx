@@ -1,13 +1,12 @@
 import React from 'react';
-// import ResponsiveMap from "./components/Contact/ResponsiveMap"; // Uncomment and use if needed
 
 const ContactSection = () => {
   return (
-    <footer className="bg-blue-700 text-white w-full overflow-hidden">
-      <div className="container mx-auto px-6 py-6 text-center">
+    <footer className="bg-blue-900 text-white w-full">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center">
         {/* Footer Content */}
         <p className="font-bold text-lg">
-          &copy; 2021 Hospital's name. All Rights Reserved by PNTEC-LTD
+          @ All Rights Reserved by Dr.Jivika : A Concept By The Chill Coders
         </p>
       </div>
     </footer>

@@ -3,12 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { Plus, Minus } from "lucide-react";
-
-// Fix for default marker icon in React Leaflet
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconShadow from "leaflet/dist/images/marker-shadow.png";
-import "../Contact/MapStyle.css"
-// Custom zoom control component that updates map zoom
+
 const MapZoomControl = ({ zoomLevel }) => {
   const map = useMap();
   React.useEffect(() => {
@@ -21,7 +18,6 @@ const ResponsiveMap = () => {
   const [zoomLevel, setZoomLevel] = useState(13);
   const position = [22.6812, 75.8798];
 
-  // Custom marker icon setup
   const defaultIcon = new Icon({
     iconUrl: markerIcon,
     shadowUrl: markerIconShadow,
@@ -31,7 +27,6 @@ const ResponsiveMap = () => {
     shadowSize: [41, 41],
   });
 
-  // Zoom handlers
   const handleZoomIn = () => {
     if (zoomLevel < 18) {
       setZoomLevel(prev => prev + 1);
@@ -45,10 +40,9 @@ const ResponsiveMap = () => {
   };
 
   return (
-    <div className="w-full h-[400px] md:h-[500px] lg:h-[600px] relative p-12">
-      <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-lg">
-        {/* Custom Zoom Controls */}
-        <div className="absolute top-4 right-4 z-[1000] flex flex-col gap-2">
+    <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] mt-16">
+      <div className="w-full h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-lg">
+        <div className="absolute top-4 right-4 z-[400] flex flex-col gap-2">
           <button
             onClick={handleZoomIn}
             className="bg-white p-2 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -70,7 +64,8 @@ const ResponsiveMap = () => {
           zoom={zoomLevel}
           scrollWheelZoom={true}
           className="w-full h-full"
-          zoomControl={false} // Disable default zoom control
+          zoomControl={false}
+          style={{ zIndex: 1 }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
