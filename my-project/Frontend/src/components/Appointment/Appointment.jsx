@@ -6,24 +6,23 @@ const Appointment = () => {
     reason: "",
     preferredDate: "",
     preferredTime: "",
-    emergency: false,
+    appointmentType: "", // Online or Offline
     doctor: "",
     department: "",
     additionalNotes: "",
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send data to the backend in a scalable way
     try {
       const response = await fetch("/api/appointments", {
         method: "POST",
@@ -94,9 +93,32 @@ const Appointment = () => {
                 className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
               />
-              <label className="flex items-center col-span-2">
-                
-              </label>
+              <div className="col-span-2 flex gap-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="appointmentType"
+                    value="Online"
+                    checked={formData.appointmentType === "Online"}
+                    onChange={handleChange}
+                    className="mr-2"
+                    required
+                  />
+                  Online
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="appointmentType"
+                    value="Offline"
+                    checked={formData.appointmentType === "Offline"}
+                    onChange={handleChange}
+                    className="mr-2"
+                    required
+                  />
+                  Offline
+                </label>
+              </div>
               <select
                 name="doctor"
                 value={formData.doctor}
@@ -140,15 +162,15 @@ const Appointment = () => {
               <p className="text-lg font-semibold">Available Slots:</p>
               <ul className="space-y-2 mt-2">
                 {Array.from({ length: 12 }, (_, i) => {
-                  const startHour = 9 + i; // Start time
-                  const start = startHour < 12 ? `${startHour}:00 AM` : `${startHour - 12}:00 PM`; // Format AM/PM
+                  const startHour = 9 + i;
+                  const start = startHour < 12 ? `${startHour}:00 AM` : `${startHour - 12}:00 PM`;
                   const endHour = startHour + 1;
                   const end =
                     endHour < 12
                       ? `${endHour}:00 AM`
                       : endHour === 12
                       ? `12:00 PM`
-                      : `${endHour - 12}:00 PM`; // Format AM/PM
+                      : `${endHour - 12}:00 PM`;
                   return (
                     <li key={i} className="flex justify-between">
                       <span>Slot {i + 1}</span>

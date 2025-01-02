@@ -6,12 +6,14 @@ const MedicalServices = () => {
       <div className="grid md:grid-cols-2 gap-8 items-center w-full max-w-6xl">
         {/* Left Image Section */}
         <div className="flex justify-center items-center">
-          <img
-            src="https://cdn.pixabay.com/photo/2020/12/05/15/55/christmas-tree-5806329_1280.jpg"
-            alt="Medical Services"
-            className="rounded-lg shadow-lg w-full max-w-sm sm:max-w-md"
-          />
-        </div>
+  <img
+    src="../src/assets/premium_photo-1681966826227-d008a1cfe9c7.jpg"
+    alt="Medical Services"
+    className="rounded-lg shadow-lg w-full max-w-2xl sm:max-w-3xl transform transition-transform hover:scale-105"
+  />
+</div>
+
+
 
         {/* Right Content Section */}
         <div className="text-center md:text-left">
