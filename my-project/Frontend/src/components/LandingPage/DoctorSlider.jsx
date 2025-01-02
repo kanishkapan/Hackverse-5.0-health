@@ -32,21 +32,37 @@ const DoctorSlider = () => {
 
   const doctors = [
     {
-      name: "Doctor's Name",
-      specialization: "NEUROLOGY",
-      image: "https://via.placeholder.com/300x400", // Replace with actual image URLs
+      name: "Dr. John Smith",
+      specialization: "Neurology",
+      image: "../src/assets/premium_photo-1661580632282-c56b1bfc0489.jpg", // Replace with actual image URLs
     },
     {
-      name: "Doctor's Name",
-      specialization: "NEUROLOGY",
-      image: "https://via.placeholder.com/300x400", // Replace with actual image URLs
+      name: "Dr. Emily Johnson",
+      specialization: "Cardiology",
+      image: "../src/assets/photo-1700308433598-baf91787c2a3.jpg", // Replace with actual image URLs
     },
     {
-      name: "Doctor's Name",
-      specialization: "NEUROLOGY",
-      image: "https://via.placeholder.com/300x400", // Replace with actual image URLs
+      name: "Dr. Michael Brown",
+      specialization: "Pediatrics",
+      image: "../src/assets/premium_photo-1661544768241-761f1b029100.jpg", // Replace with actual image URLs
+    },
+    {
+      name: "Dr. Sarah Davis",
+      specialization: "Orthopedics",
+      image: "../src/assets/photo-1673054389621-c21d2c362963.jpg", // Replace with actual image URLs
+    },
+    {
+      name: "Dr. James Wilson",
+      specialization: "Dermatology",
+      image: "../src/assets/photo-1652592322517-9be4e3e3879a.jpg", // Replace with actual image URLs
+    },
+    {
+      name: "Dr. Laura Martinez",
+      specialization: "Psychiatry",
+      image: "../src/assets/photo-1678934021124-31bcf34cbd56.jpg", // Replace with actual image URLs
     },
   ];
+  
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">

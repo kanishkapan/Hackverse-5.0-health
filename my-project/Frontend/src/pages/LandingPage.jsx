@@ -11,11 +11,11 @@ const LandingPage = () => {
   return (
     <div>
       <MedicalLandingPage />
-      <WelcomeSection />
+     
       <MedicalServices />
       <Specialties />
       <DoctorSlider />
-      <NewsGrid />
+      
       <ContactSection />
     </div>
   );
