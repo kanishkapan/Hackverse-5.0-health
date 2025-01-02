@@ -44,7 +44,7 @@ const Appointment = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center animate-fade-in overflow-hidden">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Booking Form Section */}
@@ -95,14 +95,7 @@ const Appointment = () => {
                 required
               />
               <label className="flex items-center col-span-2">
-                <input
-                  type="checkbox"
-                  name="emergency"
-                  checked={formData.emergency}
-                  onChange={handleChange}
-                  className="mr-3 w-5 h-5 text-blue-600 focus:ring-blue-400 border-gray-300 rounded"
-                />
-                <span className="text-gray-800">Emergency</span>
+                
               </label>
               <select
                 name="doctor"
@@ -143,39 +136,29 @@ const Appointment = () => {
           {/* Schedule Section */}
           <div className="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-8 shadow-xl rounded-lg transform transition-transform hover:scale-105 animate-slide-in-right">
             <h2 className="text-3xl font-bold mb-6">Schedule Hours</h2>
-            <ul className="space-y-4">
-              <li className="flex justify-between">
-                <span>Monday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Tuesday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Wednesday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Thursday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Friday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Saturday</span>
-                <span>09:00 AM - 07:00 PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Sunday</span>
-                <span>Closed</span>
-              </li>
-            </ul>
             <div className="mt-6">
-              <p className="text-lg font-semibold">Emergency</p>
-              <p className="text-lg">(237) 681-812-255</p>
+              <p className="text-lg font-semibold">Available Slots:</p>
+              <ul className="space-y-2 mt-2">
+                {Array.from({ length: 12 }, (_, i) => {
+                  const startHour = 9 + i; // Start time
+                  const start = startHour < 12 ? `${startHour}:00 AM` : `${startHour - 12}:00 PM`; // Format AM/PM
+                  const endHour = startHour + 1;
+                  const end =
+                    endHour < 12
+                      ? `${endHour}:00 AM`
+                      : endHour === 12
+                      ? `12:00 PM`
+                      : `${endHour - 12}:00 PM`; // Format AM/PM
+                  return (
+                    <li key={i} className="flex justify-between">
+                      <span>Slot {i + 1}</span>
+                      <span>
+                        {start} - {end}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>
