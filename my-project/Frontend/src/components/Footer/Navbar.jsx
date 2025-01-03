@@ -40,6 +40,12 @@ const Navbar = () => {
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/Appointment">Appointment</Link>
             </li>
+            <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
+              <Link to="/Medicines">Medicines</Link>
+            </li>
+            <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
+              <Link to="/live-chat">live-chat</Link>
+            </li>
           </ul>
 
           {/* Search and Appointment */}
