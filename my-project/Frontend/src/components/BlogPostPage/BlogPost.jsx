@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogPost = () => {
   return (
-    <div className="bg-gray-50 min-h-screen p-5 md:p-10">
+    <div className="bg-gray-50 min-h-screen pt-64 pb-16 p-5 md:p-10">
       {/* Main Layout */}
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-10">
         {/* Left Section */}
@@ -10,7 +10,7 @@ const BlogPost = () => {
           {/* Blog Post 1 */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              src="https://via.placeholder.com/800x400"
+              src="/api/placeholder/800/400"
               alt="Blog"
               className="w-full object-cover h-60"
             />
@@ -47,7 +47,7 @@ const BlogPost = () => {
           {[1, 2, 3].map((_, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
               <img
-                src="https://via.placeholder.com/800x400"
+                src="/api/placeholder/800/400"
                 alt={`Blog ${index + 2}`}
                 className="w-full object-cover h-60"
               />
@@ -104,7 +104,7 @@ const BlogPost = () => {
               {[1, 2, 3, 4].map((post) => (
                 <li key={post} className="flex items-center space-x-4">
                   <img
-                    src="https://via.placeholder.com/80"
+                    src="/api/placeholder/80/80"
                     alt="Post"
                     className="w-16 h-16 rounded-lg object-cover"
                   />

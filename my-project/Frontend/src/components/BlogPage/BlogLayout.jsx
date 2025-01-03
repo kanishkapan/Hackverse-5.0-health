@@ -6,7 +6,7 @@ const BlogLayout = () => {
       {/* Main Content */}
       <div className="flex-1">
         <img
-          src="https://via.placeholder.com/800x400" // Replace with your image URL
+          src="https://images.unsplash.com/photo-1550792436-181701c71f63?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGF0aWVudHxlbnwwfHwwfHx8MA%3D%3D" // Replace with your image URL
           alt="Doctors"
           className="w-full h-auto rounded-lg mb-4"
         />

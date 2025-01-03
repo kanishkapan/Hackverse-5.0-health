@@ -4,7 +4,7 @@ const ContactHeader = () => {
   return (
     <div className="relative w-full h-72 sm:h-96 lg:h-[500px] bg-cover bg-center text-white" 
       style={{
-        backgroundImage: `url('https://cdn.pixabay.com/photo/2017/05/02/03/41/action-2277292_960_720.jpg')`, // Replace with your image URL
+        backgroundImage: `url('../src/assets/premium_photo-1661382210749-759c11c197a4.jpg')`, // Replace with your image URL
       }}
     >
       {/* Overlay */}
