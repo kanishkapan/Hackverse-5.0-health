@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import the hook
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const LoginPage = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // Initialize the navigate hook
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const navigate = useNavigate(); // For redirecting users after login
 
   const handleLogin = async (e) => {
-    e.preventDefault(); // Prevent form submission from reloading the page
+    e.preventDefault(); // Prevent form reload
 
     // Collect form data
     const formData = new FormData(e.target);
@@ -17,25 +18,25 @@ const LoginPage = () => {
       password: formData.get("password"),
     };
 
+    setIsLoading(true); // Start loading
     try {
-      // Send login data to the backend
-      const response = await axios.post(
-        "https://your-backend-url.com/api/login",
-        data
-      );
+      // Send login data to backend
+      const response = await axios.post("http://localhost:3015/api/user/login", data);
 
       if (response.status === 200) {
-        setLoginSuccess(true); // Show success alert
+        setLoginSuccess(true); // Show success message
         setTimeout(() => {
           setLoginSuccess(false);
-          navigate("/profile"); // Redirect to Profile page
-        }, 3000); // Hide alert after 3 seconds and navigate
+          navigate("/profile"); // Redirect to profile
+        }, 3000); // Hide alert after 3 seconds
       }
     } catch (error) {
       console.error("Login failed:", error);
       setErrorMessage(
         error.response?.data?.message || "An error occurred. Please try again."
       );
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -111,9 +112,12 @@ const LoginPage = () => {
             {/* Log In Button */}
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 font-semibold"
+              className={`w-full bg-blue-500 text-white py-2 px-4 rounded-md transition duration-300 font-semibold ${
+                isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-600"
+              }`}
+              disabled={isLoading}
             >
-              Log In
+              {isLoading ? "Logging in..." : "Log In"}
             </button>
           </form>
 
