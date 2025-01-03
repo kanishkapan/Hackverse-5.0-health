@@ -11,6 +11,7 @@ const AibotPage = () => {
       <Header />
       <ChatBooth />
       <FooterAI />
+     
       
 
 

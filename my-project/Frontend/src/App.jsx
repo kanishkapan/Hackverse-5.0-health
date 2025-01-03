@@ -19,6 +19,7 @@ import LoginPage from "./components/Login/LoginPage";
 import VideoCall from "./pages/VideoCall";
 import LiveChat from "./pages/LiveChat";
 import AppointmentForm from "./pages/AppointmentForm";
+import DoctorsInfo from "./pages/DoctorsInfo";
 const App = () => {
   return (
     <Router>
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/video-call" element={<VideoCall/>} />
         <Route path="/live-chat" element={<LiveChat/>} />
+        <Route path="/doctor-info" element={<DoctorsInfo/>} />
         
      
         
