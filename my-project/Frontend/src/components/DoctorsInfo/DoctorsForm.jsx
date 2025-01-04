@@ -1,59 +1,63 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const DoctorsForm = () => {
   const [formData, setFormData] = useState({
-    age: '',
-    medicalCollege: '',
-    ugDegree: '',
-    yearOfUgCompletion: '',
-    medicalRegistrationNumber: '',
+    age: "",
+    gender: "",
+    medicalCollege: "",
+    ugDegree: "",
+    yearOfUgCompletion: "",
+    medicalRegistrationNumber: "",
     specialities: [],
-    pgDegree: '',
-    pgSpecialization: '',
-    yearOfPgCompletion: '',
-    experience: ''
+    pgDegree: "",
+    pgSpecialization: "",
+    yearOfPgCompletion: "",
+    experience: "",
   });
 
   const specialityOptions = [
-    'General Medicine',
-    'Pediatrics',
-    'Cardiology',
-    'Dermatology',
-    'Orthopedics',
-    'Neurology',
-    'Ayurveda',
-    'Gynecology',
-    'ENT',
-    'Ophthalmology'
+    "General Medicine",
+    "Pediatrics",
+    "Cardiology",
+    "Dermatology",
+    "Orthopedics",
+    "Neurology",
+    "Ayurveda",
+    "Gynecology",
+    "ENT",
+    "Ophthalmology",
   ];
 
-  const ugDegrees = ['MBBS', 'BAMS', 'BHMS', 'BDS'];
-  const pgDegrees = ['MD', 'MS', 'DNB', 'DM'];
+  const ugDegrees = ["MBBS", "BAMS", "BHMS", "BDS"];
+  const pgDegrees = ["MD", "MS", "DNB", "DM"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSpecialityChange = (e) => {
-    const value = Array.from(e.target.selectedOptions, option => option.value);
-    setFormData(prev => ({
+    const value = Array.from(e.target.selectedOptions, (option) => option.value);
+    setFormData((prev) => ({
       ...prev,
-      specialities: value
+      specialities: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/doctors/register', formData);
-      console.log('Doctor Registered:', response.data);
+      const response = await axios.post(
+        "http://localhost:5000/api/doctors/register",
+        formData
+      );
+      console.log("Doctor Registered:", response.data);
     } catch (error) {
-      console.error('Error registering doctor:', error);
+      console.error("Error registering doctor:", error);
     }
   };
 
@@ -61,13 +65,17 @@ const DoctorsForm = () => {
     <div className="min-h-screen bg-gray-50 pt-32 pb-16 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">Doctor Registration</h1>
-          
+          <h1 className="text-3xl font-bold text-blue-900 mb-8 text-center">
+            Doctor Registration
+          </h1>
+
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Age</label>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  Age
+                </label>
                 <input
                   type="number"
                   name="age"
@@ -77,15 +85,37 @@ const DoctorsForm = () => {
                   required
                 />
               </div>
+
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  Gender
+                </label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  required
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
             </div>
 
             {/* Education Details */}
             <div className="border-t pt-6">
-              <h2 className="text-xl font-bold text-blue-900 mb-4">Education Details</h2>
-              
+              <h2 className="text-xl font-bold text-blue-900 mb-4">
+                Education Details
+              </h2>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Medical College</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Medical College
+                  </label>
                   <input
                     type="text"
                     name="medicalCollege"
@@ -97,7 +127,9 @@ const DoctorsForm = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">UG Degree</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    UG Degree
+                  </label>
                   <select
                     name="ugDegree"
                     value={formData.ugDegree}
@@ -106,14 +138,18 @@ const DoctorsForm = () => {
                     required
                   >
                     <option value="">Select UG Degree</option>
-                    {ugDegrees.map(degree => (
-                      <option key={degree} value={degree}>{degree}</option>
+                    {ugDegrees.map((degree) => (
+                      <option key={degree} value={degree}>
+                        {degree}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Year of UG Completion</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Year of UG Completion
+                  </label>
                   <input
                     type="number"
                     name="yearOfUgCompletion"
@@ -125,7 +161,9 @@ const DoctorsForm = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Medical Registration Number</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Medical Registration Number
+                  </label>
                   <input
                     type="text"
                     name="medicalRegistrationNumber"
@@ -140,7 +178,9 @@ const DoctorsForm = () => {
 
             {/* Specialities */}
             <div>
-              <label className="block text-gray-700 font-semibold mb-2">Specialities</label>
+              <label className="block text-gray-700 font-semibold mb-2">
+                Specialities
+              </label>
               <select
                 multiple
                 name="specialities"
@@ -149,20 +189,28 @@ const DoctorsForm = () => {
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
-                {specialityOptions.map(speciality => (
-                  <option key={speciality} value={speciality}>{speciality}</option>
+                {specialityOptions.map((speciality) => (
+                  <option key={speciality} value={speciality}>
+                    {speciality}
+                  </option>
                 ))}
               </select>
-              <p className="text-sm text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple specialities</p>
+              <p className="text-sm text-gray-500 mt-1">
+                Hold Ctrl/Cmd to select multiple specialities
+              </p>
             </div>
 
             {/* PG Details (Optional) */}
             <div className="border-t pt-6">
-              <h2 className="text-xl font-bold text-blue-900 mb-4">Post Graduation Details (Optional)</h2>
-              
+              <h2 className="text-xl font-bold text-blue-900 mb-4">
+                Post Graduation Details (Optional)
+              </h2>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">PG Degree</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    PG Degree
+                  </label>
                   <select
                     name="pgDegree"
                     value={formData.pgDegree}
@@ -170,14 +218,18 @@ const DoctorsForm = () => {
                     className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">Select PG Degree</option>
-                    {pgDegrees.map(degree => (
-                      <option key={degree} value={degree}>{degree}</option>
+                    {pgDegrees.map((degree) => (
+                      <option key={degree} value={degree}>
+                        {degree}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">PG Specialization</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    PG Specialization
+                  </label>
                   <input
                     type="text"
                     name="pgSpecialization"
@@ -188,7 +240,9 @@ const DoctorsForm = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Year of PG Completion</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Year of PG Completion
+                  </label>
                   <input
                     type="number"
                     name="yearOfPgCompletion"
@@ -199,7 +253,9 @@ const DoctorsForm = () => {
                 </div>
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-2">Years of Experience</label>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Years of Experience
+                  </label>
                   <input
                     type="number"
                     name="experience"
