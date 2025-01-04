@@ -3,10 +3,7 @@ import axios from 'axios';
 
 const DoctorsForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
     age: '',
-    email: '',
-    phone: '',
     medicalCollege: '',
     ugDegree: '',
     yearOfUgCompletion: '',
@@ -53,7 +50,6 @@ const DoctorsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send form data to backend
       const response = await axios.post('http://localhost:5000/api/doctors/register', formData);
       console.log('Doctor Registered:', response.data);
     } catch (error) {
@@ -71,47 +67,11 @@ const DoctorsForm = () => {
             {/* Basic Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-gray-700 font-semibold mb-2">Full Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-              
-              <div>
                 <label className="block text-gray-700 font-semibold mb-2">Age</label>
                 <input
                   type="number"
                   name="age"
                   value={formData.age}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
                   onChange={handleChange}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   required

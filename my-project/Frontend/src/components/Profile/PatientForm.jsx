@@ -42,35 +42,34 @@ const PatientForm = () => {
     <div className="min-h-screen bg-gradient-to-b from-black to-blue-600 flex flex-col items-center justify-center">
       <div className="relative w-full h-72 bg-blue-800 flex items-center justify-center text-white">
         <h1 className="text-3xl font-bold">{t("patientForm.title")}</h1>
-        
       </div>
+
       <div className="mt-4 flex justify-center space-x-4">
-  <button
-    onClick={() => changeLanguage('en')}
-    className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-  >
-    English
-  </button>
-  <button
-    onClick={() => changeLanguage('hi')}
-    className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-  >
-    हिंदी
-  </button>
-  <button
-    onClick={() => changeLanguage('mr')}
-    className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-  >
-    मराठी
-  </button>
-  <button
-    onClick={() => changeLanguage('kn')}
-    className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
-  >
-    ಕನ್ನಡ
-  </button>
-</div>
-      
+        <button
+          onClick={() => changeLanguage("en")}
+          className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
+        >
+          English
+        </button>
+        <button
+          onClick={() => changeLanguage("hi")}
+          className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
+        >
+          हिंदी
+        </button>
+        <button
+          onClick={() => changeLanguage("mr")}
+          className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
+        >
+          मराठी
+        </button>
+        <button
+          onClick={() => changeLanguage("kn")}
+          className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-semibold py-2 px-6 rounded-lg transition duration-300 transform hover:scale-105"
+        >
+          ಕನ್ನಡ
+        </button>
+      </div>
 
       <form
         className="bg-white shadow-xl rounded-lg p-8 mt-8 w-full max-w-4xl"
@@ -198,15 +197,9 @@ const PatientForm = () => {
             >
               {t("patientForm.submit")}
             </button>
-            
           </div>
-    
         </div>
       </form>
-
-      {/* Language Switcher */}
-   
-
     </div>
   );
 };
