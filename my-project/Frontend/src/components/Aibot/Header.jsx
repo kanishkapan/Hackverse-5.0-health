@@ -81,9 +81,9 @@ const Header = () => {
                     variants={buttonVariants}
                     className="mt-8 flex flex-wrap gap-4"
                   >
-                    <button className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
+                    {/* <button className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
                       Learn More
-                    </button>
+                    </button> */}
                     <button
                       className="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
                       onClick={handleButtonClick}

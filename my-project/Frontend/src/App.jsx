@@ -36,8 +36,7 @@ const App = () => {
 
         {/* Contact Page */}
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/blog" element={<BlogPage />} />\
-        <Route path="/blogpost" element={<BlogPostPage />} />
+        
         <Route path="/profile/patient" element={<PatientForm />} />
         <Route path="/Appointment" element={<AppointmentForm/>} />
         <Route path="/medicines" element={<Medicines/>} />
