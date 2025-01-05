@@ -29,7 +29,7 @@ const Navbar = () => {
               <Link to="/contact">Contact</Link>
             </li>
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
-              <Link to="/profile">Profile</Link>
+              <Link to="/profile/">Profile</Link>
             </li>
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/blog">Blogs</Link>

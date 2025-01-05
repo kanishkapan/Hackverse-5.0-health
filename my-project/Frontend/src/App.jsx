@@ -20,6 +20,7 @@ import VideoCall from "./pages/VideoCall";
 import LiveChat from "./pages/LiveChat";
 import AppointmentForm from "./pages/AppointmentForm";
 import DoctorsInfo from "./pages/DoctorsInfo";
+import DashBoard from "./pages/DashBoard";
 const App = () => {
   return (
     <Router>
@@ -37,14 +38,15 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />\
         <Route path="/blogpost" element={<BlogPostPage />} />
-        <Route path="/profile" element={<PatientForm />} />
+        <Route path="/profile/patient" element={<PatientForm />} />
         <Route path="/Appointment" element={<AppointmentForm/>} />
         <Route path="/medicines" element={<Medicines/>} />
         <Route path="/signup" element={<SignIn/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/video-call" element={<VideoCall/>} />
         <Route path="/live-chat" element={<LiveChat/>} />
-        <Route path="/doctor-info" element={<DoctorsInfo/>} />
+        <Route path="/profile/doctor" element={<DoctorsInfo/>} />
+        <Route path="/dashboard" element={<DashBoard/>} />
         
      
         

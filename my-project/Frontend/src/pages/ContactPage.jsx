@@ -15,7 +15,7 @@ const ContactPage = () => {
 
       <ResponsiveMap />
       
-      <ContactForm />
+    
       <ContactSection />
       
     </div>

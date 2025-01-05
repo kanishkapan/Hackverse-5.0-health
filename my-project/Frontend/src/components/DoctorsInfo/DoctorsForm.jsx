@@ -52,7 +52,7 @@ const DoctorsForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/doctors/register",
+        "http://localhost:3015/api/user/profile/doctor",
         formData
       );
       console.log("Doctor Registered:", response.data);

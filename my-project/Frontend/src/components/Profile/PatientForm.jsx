@@ -23,16 +23,23 @@ const PatientForm = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post("/api/patient-data", formData);
-      alert(t("patientForm.formSuccess"));
-    } catch (error) {
-      console.error("Error sending data to backend:", error);
-      alert(t("patientForm.formError"));
-    }
-  };
+ // No need to manually set headers - axios will automatically include cookies
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      "http://localhost:3015/api/user/profile/patient/",
+      formData,
+      {
+        withCredentials: true // This is important for sending cookies
+      }
+    );
+    alert(t("patientForm.formSuccess"));
+  } catch (error) {
+    console.error("Error sending data to backend:", error);
+    alert(t("patientForm.formError"));
+  }
+};
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
