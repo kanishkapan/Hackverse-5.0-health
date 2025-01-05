@@ -1,38 +1,49 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import navigate for redirection
 
 const SignUp = () => {
   const [signupSuccess, setSignupSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form reload
 
+    // Collect form data
     const formData = new FormData(e.target);
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
       password: formData.get("password"),
-      role: formData.get("role") || "Patient", // Default role to "Patient"
+      role: formData.get("role") || "Patient", // Default to "Patient"
     };
 
+    setIsLoading(true); // Start loading
     try {
+      // Send signup data to backend
       const response = await axios.post(
         "http://localhost:3015/api/user/register",
         data
       );
 
       if (response.status === 200) {
-        setSignupSuccess(true); // Show success alert
+        setSignupSuccess(true); // Show success message
+        const redirectUrl = response.data.redirectTo; // Get the redirect URL from the response
+
         setTimeout(() => {
           setSignupSuccess(false);
-        }, 3000); // Alert disappears after 3 seconds
+          navigate(redirectUrl); // Redirect to the URL received from the backend
+        }, 3000); // Hide alert after 3 seconds
       }
     } catch (error) {
-      console.error("Error during sign-up:", error);
+      console.error("Sign-up failed:", error);
       setErrorMessage(
-        error.response?.data?.message || "Sign-up failed. Please try again."
+        error.response?.data?.message || "An error occurred. Please try again."
       );
+    } finally {
+      setIsLoading(false); // Stop loading
     }
   };
 
@@ -48,7 +59,7 @@ const SignUp = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-blue-500/20" />
-       
+        
       </div>
 
       {/* Right Form Section */}

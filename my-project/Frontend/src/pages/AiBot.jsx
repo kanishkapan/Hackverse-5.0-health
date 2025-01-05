@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Aibot/Header";
 import ChatBooth from "../components/Aibot/ChatBooth";
 import FooterAI from "../components/Aibot/Footerai";
-import MedicalChatBot from "../components/DoctorsInfo/MedicalChatBot";
+import ProfileNavbar from "../components/Footer/ProfileNavbar";
 
 
 
@@ -12,7 +12,10 @@ const AibotPage = () => {
       <Header />
       <ChatBooth />
       <FooterAI />
-      <ProfileNavbar/>
+      <ProfileNavbar />
+     
+    
+      
      
      
       

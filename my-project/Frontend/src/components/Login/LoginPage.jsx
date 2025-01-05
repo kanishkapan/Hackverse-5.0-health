@@ -10,24 +10,26 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form reload
-
+  
     // Collect form data
     const formData = new FormData(e.target);
     const data = {
       email: formData.get("email"),
       password: formData.get("password"),
     };
-
+  
     setIsLoading(true); // Start loading
     try {
       // Send login data to backend
       const response = await axios.post("http://localhost:3015/api/user/login", data);
-
+  
       if (response.status === 200) {
         setLoginSuccess(true); // Show success message
+        const redirectUrl = response.data.redirectTo; // Get the redirect URL from the response
+  
         setTimeout(() => {
           setLoginSuccess(false);
-          navigate("/profile"); // Redirect to profile
+          navigate(redirectUrl); // Redirect to the URL received from the backend
         }, 3000); // Hide alert after 3 seconds
       }
     } catch (error) {
@@ -38,7 +40,7 @@ const LoginPage = () => {
     } finally {
       setIsLoading(false); // Stop loading
     }
-  };
+  };  
 
   return (
     <div className="flex min-h-screen bg-gray-50">
