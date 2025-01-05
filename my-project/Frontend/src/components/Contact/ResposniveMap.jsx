@@ -6,7 +6,6 @@ import { Plus, Minus } from "lucide-react";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconShadow from "leaflet/dist/images/marker-shadow.png";
 
-// Leaflet Bouncing Marker Animation (Bouncing when added)
 const MapZoomControl = ({ zoomLevel }) => {
   const map = useMap();
   React.useEffect(() => {
@@ -71,6 +70,7 @@ const ResponsiveMap = () => {
       description: "Description for CHL Group of Hospitals",
     },
   ];
+  
 
   const defaultIcon = new Icon({
     iconUrl: markerIcon,
@@ -83,20 +83,19 @@ const ResponsiveMap = () => {
 
   const handleZoomIn = () => {
     if (zoomLevel < 18) {
-      setZoomLevel((prev) => prev + 1);
+      setZoomLevel(prev => prev + 1);
     }
   };
 
   const handleZoomOut = () => {
     if (zoomLevel > 5) {
-      setZoomLevel((prev) => prev - 1);
+      setZoomLevel(prev => prev - 1);
     }
   };
 
   return (
     <div className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] mt-16">
       <div className="w-full h-full rounded-lg overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-lg">
-        {/* Zoom Control Buttons */}
         <div className="absolute top-4 right-4 z-[400] flex flex-col gap-2">
           <button
             onClick={handleZoomIn}
@@ -114,7 +113,6 @@ const ResponsiveMap = () => {
           </button>
         </div>
 
-        {/* Map Container */}
         <MapContainer
           center={position}
           zoom={zoomLevel}
@@ -127,19 +125,8 @@ const ResponsiveMap = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {/* Marker with Bounce Animation */}
           {hospitals.map((hospital, index) => (
-            <Marker
-              key={index}
-              position={hospital.position}
-              icon={defaultIcon}
-              eventHandlers={{
-                add: (e) => {
-                  e.target.setBounceOptions({ duration: 1000, height: 50 });
-                  e.target.bounce();
-                },
-              }}
-            >
+            <Marker key={index} position={hospital.position} icon={defaultIcon}>
               <Popup className="rounded-lg">
                 <div className="p-2">
                   <h3 className="font-semibold mb-1">{hospital.name}</h3>

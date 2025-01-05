@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 const PatientForm = () => {
   const { t, i18n } = useTranslation(); // useTranslation hook for language handling
-
   const [formData, setFormData] = useState({
     age: "",
     gender: "",
@@ -14,6 +13,24 @@ const PatientForm = () => {
     allergies: "",
     medications: "",
   });
+  const [isEditing, setIsEditing] = useState(false); // For toggling edit mode
+  const [isLoading, setIsLoading] = useState(true); // To handle loading state
+
+  // Fetch the patient's data from the backend
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3015/api/user/profile/patient", { withCredentials: true });
+        setFormData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching patient data:", error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchPatientData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,27 +40,39 @@ const PatientForm = () => {
     }));
   };
 
- // No need to manually set headers - axios will automatically include cookies
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post(
-      "http://localhost:3015/api/user/profile/patient/",
-      formData,
-      {
-        withCredentials: true // This is important for sending cookies
-      }
-    );
-    alert(t("patientForm.formSuccess"));
-  } catch (error) {
-    console.error("Error sending data to backend:", error);
-    alert(t("patientForm.formError"));
-  }
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        "http://localhost:3015/api/user/profile/patient/",
+        formData,
+        {
+          withCredentials: true, // Important for sending cookies
+        }
+      );
+      alert(t("patientForm.formSuccess"));
+      setIsEditing(false); // After successful update, disable edit mode
+    } catch (error) {
+      console.error("Error sending data to backend:", error);
+      alert(t("patientForm.formError"));
+    }
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true); // Enable edit mode when button is clicked
+  };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-black to-blue-600 flex items-center justify-center">
+        <div className="text-white font-semibold text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-blue-600 flex flex-col items-center justify-center">
@@ -98,6 +127,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -112,6 +142,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             >
               <option value="" disabled>
                 {t("patientForm.selectGender")}
@@ -134,6 +165,7 @@ const handleSubmit = async (e) => {
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               rows="4"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             ></textarea>
           </div>
 
@@ -149,6 +181,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -164,6 +197,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -179,6 +213,7 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
+              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -193,6 +228,7 @@ const handleSubmit = async (e) => {
               value={formData.medications}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -202,11 +238,23 @@ const handleSubmit = async (e) => {
               type="submit"
               className="w-full md:w-1/3 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg"
             >
-              {t("patientForm.submit")}
+              {isEditing ? t("patientForm.submit") : t("patientForm.edit")}
             </button>
           </div>
         </div>
       </form>
+
+      {/* Edit Profile Button */}
+      {!isEditing && (
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={handleEdit}
+            className="text-white bg-blue-600 hover:bg-blue-700 font-semibold py-2 px-6 rounded-lg"
+          >
+            {t("patientForm.editProfile")}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

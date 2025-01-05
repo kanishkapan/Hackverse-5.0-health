@@ -5,12 +5,13 @@ import ContactForm from "../components/Contact/ContactForm";
 import Navbar from "../components/Footer/Navbar";
 import ContactHeader from "../components/Contact/ContactHeader";
 import ContactSection from "../components/Footer/ContactSection";
+import DoctorsHeader from "../components/DoctorsInfo/DoctorsFormHeader";
 
 const ContactPage = () => {
   return (
     <div>
 
-     <ContactHeader  />
+    <DoctorsHeader/>
      
 
       <ResponsiveMap />

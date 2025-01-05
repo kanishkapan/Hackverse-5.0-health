@@ -48,10 +48,7 @@ const SignUp = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-blue-500/20" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 text-white bg-gradient-to-b from-transparent to-black/50">
-          <h2 className="text-3xl font-bold mb-2">Welcome to Jivika</h2>
-          <p className="text-lg">Your trusted partner in healthcare</p>
-        </div>
+       
       </div>
 
       {/* Right Form Section */}

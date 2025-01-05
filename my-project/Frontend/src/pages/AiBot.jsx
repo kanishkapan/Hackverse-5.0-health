@@ -12,7 +12,8 @@ const AibotPage = () => {
       <Header />
       <ChatBooth />
       <FooterAI />
-      <MedicalChatBot />
+      <ProfileNavbar/>
+     
      
       
 
