@@ -16,7 +16,7 @@ const MedicalLandingPage = () => {
         loop 
         playsInline
       >
-        <source src="src/assets/40353-425442466_small.mp4" type="video/mp4" />
+        <source src="src/assets/40353-425442466_small-min.mp4" type="video/mp4" />
       </video>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-transparent"></div>

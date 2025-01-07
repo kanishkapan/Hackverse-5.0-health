@@ -67,7 +67,7 @@ const DoctorSlider = () => {
     {
       name: "Dr. Sarah Davis",
       specialization: "Orthopedics",
-      image: "../src/assets/photo-1673054389621-c21d2c362963.jpg",
+      image: "https://plus.unsplash.com/premium_photo-1661766718556-13c2efac1388?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/drsarahdavis",
         facebook: "https://www.facebook.com/drsarahdavis",
@@ -77,7 +77,7 @@ const DoctorSlider = () => {
     {
       name: "Dr. James Wilson",
       specialization: "Dermatology",
-      image: "../src/assets/photo-1652592322517-9be4e3e3879a.jpg",
+      image: "https://images.unsplash.com/photo-1636152147367-584ff3e3b694?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/drjameswilson",
         facebook: "https://www.facebook.com/drjameswilson",
@@ -87,7 +87,7 @@ const DoctorSlider = () => {
     {
       name: "Dr. Laura Martinez",
       specialization: "Psychiatry",
-      image: "../src/assets/photo-1678934021124-31bcf34cbd56.jpg",
+      image: "https://plus.unsplash.com/premium_photo-1661580489566-3775b1cebeec?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       socialLinks: {
         linkedin: "https://www.linkedin.com/in/drlauramartinez",
         facebook: "https://www.facebook.com/drlauramartinez",

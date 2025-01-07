@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../components/Aibot/Header";
-import ChatBooth from "../components/Aibot/ChatBooth";
 import FooterAI from "../components/Aibot/Footerai";
 import ProfileNavbar from "../components/Footer/ProfileNavbar";
-
-
-
+import ChatInterface from "../components/Aibot/ChatInterface";
 const AibotPage = () => {
   return (
     <div>
       <Header />
-      <ChatBooth />
+      <ChatInterface />
+     
+  
+      
       <FooterAI />
       <ProfileNavbar />
      
