@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
-// Import Navbar
+// Import Navbar components
 import Navbar from "./components/Footer/Navbar";
+import ProfileNavbar from "./components/Footer/ProfileNavbar";
 
 // Import Page Components
 import AibotPage from "../src/pages/AiBot";
@@ -21,11 +22,13 @@ import LiveChat from "./pages/LiveChat";
 import AppointmentForm from "./pages/AppointmentForm";
 import DoctorsInfo from "./pages/DoctorsInfo";
 import DashBoard from "./pages/DashBoard";
+import NavbarSelector from "./components/Footer/NavbarSelector"
+
 const App = () => {
   return (
     <Router>
-      {/* Navbar displayed on all pages */}
-      <Navbar />
+      {/* Navbar Selector */}
+      <NavbarSelector />
       
       <Routes>
         {/* Landing Page */}
@@ -37,20 +40,18 @@ const App = () => {
         {/* Contact Page */}
         <Route path="/contact" element={<ContactPage />} />
         
+        {/* Profile Pages */}
         <Route path="/profile/patient" element={<PatientForm />} />
-        <Route path="/Appointment" element={<AppointmentForm/>} />
-        <Route path="/medicines" element={<Medicines/>} />
-        <Route path="/signup" element={<SignIn/>} />
-        <Route path="/login" element={<LoginPage/>} />
-        <Route path="/video-call" element={<VideoCall/>} />
-        <Route path="/live-chat" element={<LiveChat/>} />
-        <Route path="/profile/doctor" element={<DoctorsInfo/>} />
-        <Route path="/dashboard" element={<DashBoard/>} />
-        
-     
-        
+        <Route path="/profile/doctor" element={<DoctorsInfo />} />
 
-       
+        {/* Other Pages */}
+        <Route path="/Appointment" element={<AppointmentForm />} />
+        <Route path="/medicines" element={<Medicines />} />
+        <Route path="/signup" element={<SignIn />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/video-call" element={<VideoCall />} />
+        <Route path="/live-chat" element={<LiveChat />} />
+        <Route path="/dashboard" element={<DashBoard />} />
       </Routes>
     </Router>
   );

@@ -28,9 +28,9 @@ const Navbar = () => {
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/contact">Contact</Link>
             </li>
-            <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
+            {/* <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/profile/">Profile</Link>
-            </li>
+            </li> */}
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/Appointment">Appointment</Link>
             </li>

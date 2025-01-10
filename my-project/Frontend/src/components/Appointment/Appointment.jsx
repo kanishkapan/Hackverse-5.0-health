@@ -1,38 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { api } from "../../axios.config.js"; // Assuming axios instance is set up in axios.config.js
+// import Cookies from "js-cookie"; // Assuming you use js-cookie for cookies management
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
-    phone: "",
+    doctorId: "",
     reason: "",
-    preferredDate: "",
-    preferredTime: "",
-    appointmentType: "", // Online or Offline
-    doctor: "",
-    department: "",
-    additionalNotes: "",
+    dateTime: "", // Combined date and time
+    mode: "", // Online or Offline
+    notes: "", // Optional
   });
+
+  const [departments, setDepartments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+
+  // Fetch departments on mount
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await api.get("/api/user/appointment/uniqueDepartments");
+        setDepartments(response.data.departments); // Update with distinct departments
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+    fetchDepartments();
+  }, []);
+
+  // Fetch doctors based on selected department
+  const fetchDoctors = async (department) => {
+    try {
+      const response = await api.get(`/api/user/appointment/doctors?specialization=${department}`);
+      setDoctors(response.data.doctors); // Update with doctors from selected department
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
+  };
+
+  const handleDepartmentChange = (e) => {
+    const department = e.target.value;
+    setFormData({ ...formData, department });
+    fetchDoctors(department); // Fetch doctors on department change
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    console.log(formData.doctorId, `${formData.preferredDate}T${formData.preferredTime}:00`, formData.reason, formData.appointmentType,formData.additionalNotes);
+    // Creating the final data for submission
+    const appointmentData = {
+      doctorId: formData.doctorId,
+      dateTime: `${formData.preferredDate}T${formData.preferredTime}:00`, // Combining date and time
+      reason: formData.reason,
+      mode: formData.appointmentType, // Online or Offline
+      notes: formData.additionalNotes,
+    };
 
-      if (response.ok) {
+    try {
+      const response = await api.post("/api/user/appointment/schedule", appointmentData);
+
+      if (response.status === 200) {
         alert("Appointment booked successfully!");
       } else {
         alert("Error booking appointment.");
@@ -64,7 +96,15 @@ const Appointment = () => {
                 onChange={handleChange}
                 className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
                 required
-              />
+              >
+                <option value="">Select Doctor</option>
+                {doctors.map((doc) => (
+                  <option key={doc._id} value={doc._id}>
+                    {doc.UserId.name}
+                  </option>
+                ))}
+              </select>
+
               <select
                 name="reason"
                 value={formData.reason}
@@ -77,6 +117,7 @@ const Appointment = () => {
                 <option value="Follow-up">Follow-up</option>
                 <option value="Emergency">Emergency</option>
               </select>
+
               <input
                 type="date"
                 name="preferredDate"
@@ -119,26 +160,6 @@ const Appointment = () => {
                   Offline
                 </label>
               </div>
-              <select
-                name="doctor"
-                value={formData.doctor}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
-              >
-                <option value="">Doctor (Optional)</option>
-                <option value="Dr. Smith">Dr. Smith</option>
-                <option value="Dr. Johnson">Dr. Johnson</option>
-              </select>
-              <select
-                name="department"
-                value={formData.department}
-                onChange={handleChange}
-                className="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-md"
-              >
-                <option value="">Department (Optional)</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Neurology">Neurology</option>
-              </select>
               <textarea
                 name="additionalNotes"
                 placeholder="Additional Notes (Optional)"
