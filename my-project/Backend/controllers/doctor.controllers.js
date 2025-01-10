@@ -7,7 +7,9 @@ export const setDoctorProfile = async (req, res) => {
     const existingDoctorProfile = await DoctorDetails.findOne({ UserId: userId });
     
     if (existingDoctorProfile) {
+      
       return res.status(400).json({
+        success: false,        
         message: "Doctor profile already exists. You can update your profile instead.",
       });
     }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {api} from "../../axios.config.js";
 import { useNavigate } from "react-router-dom"; // Import navigate for redirection
 
 const SignUp = () => {
@@ -23,8 +23,8 @@ const SignUp = () => {
     setIsLoading(true); // Start loading
     try {
       // Send signup data to backend
-      const response = await axios.post(
-        "http://localhost:3015/api/user/register",
+      const response = await api.post(
+        "/api/user/register",
         data
       );
 

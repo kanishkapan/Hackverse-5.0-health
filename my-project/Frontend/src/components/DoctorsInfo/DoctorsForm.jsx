@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {api} from "../../axios.config.js";
 
 const DoctorsForm = () => {
   const [formData, setFormData] = useState({
@@ -53,8 +53,8 @@ const DoctorsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3015/api/user/profile/doctor",
+      const response = await api.post(
+        "/api/user/profile/doctor",
         formData
       );
       console.log("Doctor Registered:", response.data);

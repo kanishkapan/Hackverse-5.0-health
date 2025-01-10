@@ -29,7 +29,7 @@ const App = () => {
     <Router>
       {/* Navbar Selector */}
       <NavbarSelector />
-      
+
       <Routes>
         {/* Landing Page */}
         <Route path="/" element={<LandingPage />} />
@@ -39,7 +39,7 @@ const App = () => {
 
         {/* Contact Page */}
         <Route path="/contact" element={<ContactPage />} />
-        
+
         {/* Profile Pages */}
         <Route path="/profile/patient" element={<PatientForm />} />
         <Route path="/profile/doctor" element={<DoctorsInfo />} />
