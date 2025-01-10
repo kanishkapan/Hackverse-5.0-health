@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { api } from "../../axios.config.js"; // Assuming axios instance is set up in axios.config.js
-// import Cookies from "js-cookie"; // Assuming you use js-cookie for cookies management
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
