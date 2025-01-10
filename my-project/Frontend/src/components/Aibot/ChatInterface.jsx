@@ -80,7 +80,7 @@ const ChatInterface = () => {
         {/* Header */}
         <div className="bg-blue-700 text-white p-4 flex items-center animate-fade-in">
           <img
-            src="https://via.placeholder.com/40"
+            src="https://cdn.pixabay.com/photo/2024/03/11/19/15/ai-generated-8627457_1280.png"
             alt="Profile"
             className="w-10 h-10 rounded-full mr-3"
           />
