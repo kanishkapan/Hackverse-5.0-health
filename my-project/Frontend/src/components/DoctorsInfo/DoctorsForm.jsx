@@ -179,52 +179,49 @@ const DoctorsForm = () => {
             </div>
 
             {/* Specialities */}
-            <div className="relative">
-              <label className="block text-gray-700 font-semibold mb-2">
-                Specialities
-              </label>
+            <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">Select Specialities</h1>
 
-              {/* Wrapper for Checkboxes */}
-              <div className="relative">
-                <div className="overflow-hidden max-h-72">
-                  <ul className="space-y-4 p-4 border border-gray-300 rounded-lg shadow-lg hover:border-blue-500 transition-all duration-300 ease-in-out">
-                    {specialityOptions.map((speciality) => (
-                      <li
-                        key={speciality}
-                        className="flex items-center space-x-3 opacity-0 animate-fadeIn"
-                      >
-                        <input
-                          type="checkbox"
-                          value={speciality}
-                          onChange={handleSpecialityChange}
-                          checked={formData.specialities.includes(speciality)}
-                          className="form-checkbox text-blue-500 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                        />
-                        <span className="text-gray-700 font-semibold">{speciality}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+      <div className="relative">
+        <label className="block text-gray-700 font-semibold mb-2">
+          Specialities
+        </label>
 
-              {/* Animation for Checkbox Appearance */}
-              <style jsx>{`
-                @keyframes fadeIn {
-                  0% {
-                    opacity: 0;
-                  }
-                  100% {
-                    opacity: 1;
-                  }
-                }
+        {/* Wrapper for Checkboxes */}
+        <div className="relative overflow-y-auto max-h-72 border border-gray-300 rounded-lg shadow-lg p-4">
+          <ul className="space-y-4">
+            {specialityOptions.map((speciality) => (
+              <li key={speciality} className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  value={speciality}
+                  onChange={handleSpecialityChange}
+                  checked={formData.specialities.includes(speciality)}
+                  className="form-checkbox text-blue-500 focus:ring-blue-500"
+                />
+                <span className="text-gray-700 font-medium">{speciality}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
-                /* Animation for each list item */
-                .animate-fadeIn {
-                  animation: fadeIn 0.5s forwards;
-                }
-              `}</style>
-            </div>
-
+      {/* Display Selected Specialities */}
+      <div className="mt-6">
+        <h2 className="text-lg font-semibold mb-2">Selected Specialities:</h2>
+        {formData.specialities.length > 0 ? (
+          <ul className="list-disc pl-5">
+            {formData.specialities.map((spec, index) => (
+              <li key={index} className="text-gray-800">
+                {spec}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-500">No specialities selected.</p>
+        )}
+      </div>
+    </div>
             {/* PG Details (Optional) */}
             <div className="border-t pt-6">
               <h2 className="text-xl font-bold text-blue-900 mb-4">

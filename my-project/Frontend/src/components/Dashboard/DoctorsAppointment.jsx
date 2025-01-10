@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import {api }from "../../axios.config.js";
+import React, { useState, useEffect } from "react";
 import {api} from "../../axios.config.js";
 
 const DoctorAppointments = () => {
@@ -146,3 +148,4 @@ const DoctorAppointments = () => {
 };
 
 export default DoctorAppointments;
+
