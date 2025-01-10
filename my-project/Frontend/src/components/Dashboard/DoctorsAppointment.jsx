@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {api }from "../../axios.config.js";
-import React, { useState, useEffect } from "react";
-import {api} from "../../axios.config.js";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
