@@ -1,39 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {api} from "../../axios.config.js";
 
 const DoctorAppointments = () => {
-  const [appointments, setAppointments] = useState([
-    {
-      id: 1,
-      patientName: "John Doe",
-      time: "10:00 AM",
-      date: "2025-01-01",
-      status: "pending",
-    },
-    {
-      id: 2,
-      patientName: "Jane Smith",
-      time: "11:30 AM",
-      date: "2025-01-01",
-      status: "pending",
-    },
-  ]);
+  const [appointments, setAppointments] = useState([]);
+  const [previousAppointments, setPreviousAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [previousAppointments, setPreviousAppointments] = useState([
-    {
-      id: 1,
-      patientName: "Alice Brown",
-      time: "9:00 AM",
-      date: "2024-12-31",
-      status: "accepted",
-    },
-    {
-      id: 2,
-      patientName: "Bob Martin",
-      time: "10:30 AM",
-      date: "2024-12-30",
-      status: "rejected",
-    },
-  ]);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get("/api/user/appointment/dashboard/doctor");
+        
+        if (response.data.success) {
+          // Separate appointments into current and previous
+          const current = [];
+          const previous = [];
+          const now = new Date();
+
+          response.data.appointments.forEach((appointment) => {
+            const appointmentDateTime = new Date(appointment.dateTime);
+            if (appointmentDateTime >= now) {
+              current.push({
+                id: appointment.appointmentId,
+                patientName: appointment.patientName || "Unknown",
+                time: appointmentDateTime.toLocaleTimeString(),
+                date: appointmentDateTime.toLocaleDateString(),
+                status: appointment.status || "pending",
+              });
+            } else {
+              previous.push({
+                id: appointment.appointmentId,
+                patientName: appointment.patientName || "Unknown",
+                time: appointmentDateTime.toLocaleTimeString(),
+                date: appointmentDateTime.toLocaleDateString(),
+                status: appointment.status || "completed",
+              });
+            }
+          });
+
+          setAppointments(current);
+          setPreviousAppointments(previous);
+        } else {
+          setError("Failed to fetch appointments.");
+        }
+      } catch (err) {
+        console.error("Error fetching appointments:", err);
+        setError("Error fetching appointments.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
 
   const handleAction = (id, action) => {
     setAppointments((prev) =>
@@ -42,6 +63,14 @@ const DoctorAppointments = () => {
       )
     );
   };
+
+  if (loading) {
+    return <p className="text-center text-gray-500">Loading appointments...</p>;
+  }
+
+  if (error) {
+    return <p className="text-center text-red-500">{error}</p>;
+  }
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">

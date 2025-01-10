@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { api } from "../../axios.config.js";
+import React, { useState, useEffect } from "react";
+import { api } from "../../axios.config.js"; // Assuming axios instance is set up in axios.config.js
+// import Cookies from "js-cookie"; // Assuming you use js-cookie for cookies management
 
 const Appointment = () => {
   const [formData, setFormData] = useState({
@@ -51,7 +51,14 @@ const Appointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData.doctorId, `${formData.preferredDate}T${formData.preferredTime}:00`, formData.reason, formData.appointmentType,formData.additionalNotes);
+    console.log(
+      formData.doctorId,
+      `${formData.preferredDate}T${formData.preferredTime}:00`,
+      formData.reason,
+      formData.appointmentType,
+      formData.additionalNotes
+    );
+
     // Creating the final data for submission
     const appointmentData = {
       doctorId: formData.doctorId,
@@ -64,7 +71,7 @@ const Appointment = () => {
     try {
       const response = await api.post("/api/user/appointment/schedule", appointmentData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("Appointment booked successfully!");
       } else {
         alert("Error booking appointment.");

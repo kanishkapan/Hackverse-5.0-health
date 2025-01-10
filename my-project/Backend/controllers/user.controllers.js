@@ -99,7 +99,7 @@ const handleLogin = async (user, res) => {
     sameSite: "strict",
     maxAge: 24 * 60 * 60 * 1000, // in milliseconds
   });
-  console.log(user.role);
+  // console.log(user.role);
   // Redirect based on user role
   if (user.role === "Patient") {
     return res.json({
