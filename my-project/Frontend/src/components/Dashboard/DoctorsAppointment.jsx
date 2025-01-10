@@ -1,47 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {api }from "../../axios.config.js";
 
 const DoctorAppointments = () => {
-  const [appointments, setAppointments] = useState([
-    {
-      id: 1,
-      patientName: "John Doe",
-      time: "10:00 AM",
-      date: "2025-01-01",
-      status: "pending",
-    },
-    {
-      id: 2,
-      patientName: "Jane Smith",
-      time: "11:30 AM",
-      date: "2025-01-01",
-      status: "pending",
-    },
-  ]);
+  const [appointments, setAppointments] = useState([]);
+  const [previousAppointments, setPreviousAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const [previousAppointments, setPreviousAppointments] = useState([
-    {
-      id: 1,
-      patientName: "Alice Brown",
-      time: "9:00 AM",
-      date: "2024-12-31",
-      status: "accepted",
-    },
-    {
-      id: 2,
-      patientName: "Bob Martin",
-      time: "10:30 AM",
-      date: "2024-12-30",
-      status: "rejected",
-    },
-  ]);
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await api.get("/api/user/appointment/dashboard/doctor");
+        const { upcomingAppointments, pastAppointments } = response.data;
 
-  const handleAction = (id, action) => {
-    setAppointments((prev) =>
-      prev.map((appointment) =>
-        appointment.id === id ? { ...appointment, status: action } : appointment
-      )
-    );
+        // Assuming the API returns two arrays: upcomingAppointments and pastAppointments
+        setAppointments(upcomingAppointments || []);
+        setPreviousAppointments(pastAppointments || []);
+      } catch (err) {
+        setError("Failed to fetch appointment data. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointments();
+  }, []);
+
+  const handleAction = async (id, action) => {
+    try {
+      // Make API call to update the appointment status
+      await api.put(`/api/user/appointment/${id}`, { status: action });
+
+      // Update the local state after the API call
+      setAppointments((prev) =>
+        prev.map((appointment) =>
+          appointment.id === id ? { ...appointment, status: action } : appointment
+        )
+      );
+    } catch (err) {
+      setError("Failed to update appointment status. Please try again.");
+    }
   };
+
+  if (loading) {
+    return <div className="text-center p-6">Loading appointments...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center p-6 text-red-500">{error}</div>;
+  }
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
