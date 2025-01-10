@@ -1,0 +1,105 @@
+import {Appointment, DoctorDetails} from "../models/index.js";
+
+export const scheduleAppointment = async (req, res) => {
+  try {
+    const { doctorId, dateTime, reason, mode, notes } = req.body;
+
+    const patientId = req.user._id; // Get the logged-in patient's ID
+    console.log ("Patient:", patientId);
+
+    // Find doctors that belong to the selected department
+    // const availableDoctors = await DoctorDetails.find({ Specialization: { $in: [department] } });
+    // console.log("Available Doctors:", availableDoctors);
+    // console.log("Doctor ID:", doctorId);
+    // console.log("Available Doctors IDs:", availableDoctors.map(doc => doc._id));
+    // // Check if the selected doctor exists in the available doctors list
+    // if (!availableDoctors.some((doctor) => doctor._id.toString() === doctorId)) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: "The selected doctor does not belong to the chosen department.",
+    //   });
+    // }
+
+    // Create the appointment
+    const newAppointment = new Appointment({
+      patientId,
+      doctorId,
+      dateTime,
+      reason,
+      mode,
+      notes
+    });
+
+    await newAppointment.save();
+
+    // Optionally, send a notification to the doctor
+    // You could use a notification service here (e.g., email, push notifications, etc.)
+
+    res.status(201).json({
+      success: true,
+      message: "Appointment scheduled successfully",
+      data: newAppointment,
+    });
+  } catch (error) {
+    console.error("Error scheduling appointment:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while scheduling appointment",
+      error: error.message,
+    });
+  }
+};
+
+export const getDepartments = async (req, res) => {
+    try {
+      const departments = await DoctorDetails.distinct("Specialization");
+      res.status(200).json({
+        success: true,
+        departments,
+      });
+    } catch (error) {
+      console.error("Error fetching departments:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server error while fetching departments",
+        error: error.message,
+      });
+    }
+  };
+
+  export const getDoctorsByDepartment = async (req, res) => {
+    try {
+      const { specialization } = req.query; // Get specialization from query params
+      if (!specialization) {
+        return res.status(400).json({
+          success: false,
+          message: 'Specialization is required',
+        });
+      }
+  
+      // Find doctors that belong to the selected specialization (array of specializations)
+      const doctors = await DoctorDetails.find({ Specialization: specialization })
+        .populate('UserId', 'name') // Populate the 'UserId' field with 'name'
+        .exec(); // Ensure this is executed correctly
+  
+      if (!doctors || doctors.length === 0) {
+        return res.status(404).json({
+          success: false,
+          message: `No doctors found for specialization: ${specialization}`,
+        });
+      }
+  
+      res.status(200).json({
+        success: true,
+        doctors, // This will include doctor details and their associated 'UserId' name
+      });
+    } catch (error) {
+      console.error("Error fetching doctors by department:", error);
+      res.status(500).json({
+        success: false,
+        message: "Server error while fetching doctors",
+        error: error.message,
+      });
+    }
+  };
+  
