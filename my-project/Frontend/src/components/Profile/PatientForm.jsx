@@ -1,36 +1,18 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { api } from "../../axios.config.js";
 import { useTranslation } from "react-i18next";
 
 const PatientForm = () => {
-  const { t, i18n } = useTranslation(); // useTranslation hook for language handling
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState({
-    age: "",
-    gender: "",
-    medicalHistory: "",
-    contact: "",
-    emergencyContact: "",
-    allergies: "",
-    medications: "",
+    Age: "",
+    Gender: "",
+    MedicalHistory: "",
+    Contact: "",
+    EmergencyContact: "",
+    Allergies: "",
+    CurrentMedications: "",
   });
-  const [isEditing, setIsEditing] = useState(false); // For toggling edit mode
-  const [isLoading, setIsLoading] = useState(true); // To handle loading state
-
-  // Fetch the patient's data from the backend
-  useEffect(() => {
-    const fetchPatientData = async () => {
-      try {
-        const response = await axios.get("http://localhost:3015/api/user/profile/patient", { withCredentials: true });
-        setFormData(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching patient data:", error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchPatientData();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,36 +25,32 @@ const PatientForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+      await api.post(
         "http://localhost:3015/api/user/profile/patient/",
         formData,
         {
-          withCredentials: true, // Important for sending cookies
+          withCredentials: true,
         }
       );
       alert(t("patientForm.formSuccess"));
-      setIsEditing(false); // After successful update, disable edit mode
+      setFormData({
+        Age: "",
+        Gender: "",
+        MedicalHistory: "",
+        Contact: "",
+        EmergencyContact: "",
+        Allergies: "",
+        CurrentMedications: "",
+      });
     } catch (error) {
       console.error("Error sending data to backend:", error);
       alert(t("patientForm.formError"));
     }
   };
 
-  const handleEdit = () => {
-    setIsEditing(true); // Enable edit mode when button is clicked
-  };
-
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-black to-blue-600 flex items-center justify-center">
-        <div className="text-white font-semibold text-xl">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-blue-600 flex flex-col items-center justify-center">
@@ -122,12 +100,11 @@ const PatientForm = () => {
             </label>
             <input
               type="number"
-              name="age"
-              value={formData.age}
+              name="Age"
+              value={formData.Age}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -137,19 +114,18 @@ const PatientForm = () => {
               {t("patientForm.gender")}:
             </label>
             <select
-              name="gender"
-              value={formData.gender}
+              name="Gender"
+              value={formData.Gender}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             >
               <option value="" disabled>
                 {t("patientForm.selectGender")}
               </option>
-              <option value="male">{t("patientForm.male")}</option>
-              <option value="female">{t("patientForm.female")}</option>
-              <option value="other">{t("patientForm.other")}</option>
+              <option value="Male">{t("patientForm.male")}</option>
+              <option value="Female">{t("patientForm.female")}</option>
+              <option value="Other">{t("patientForm.other")}</option>
             </select>
           </div>
 
@@ -159,13 +135,12 @@ const PatientForm = () => {
               {t("patientForm.medicalHistory")}:
             </label>
             <textarea
-              name="medicalHistory"
-              value={formData.medicalHistory}
+              name="MedicalHistory"
+              value={formData.MedicalHistory}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               rows="4"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             ></textarea>
           </div>
 
@@ -176,12 +151,11 @@ const PatientForm = () => {
             </label>
             <input
               type="tel"
-              name="contact"
-              value={formData.contact}
+              name="Contact"
+              value={formData.Contact}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -192,12 +166,11 @@ const PatientForm = () => {
             </label>
             <input
               type="tel"
-              name="emergencyContact"
-              value={formData.emergencyContact}
+              name="EmergencyContact"
+              value={formData.EmergencyContact}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -208,12 +181,11 @@ const PatientForm = () => {
             </label>
             <input
               type="text"
-              name="allergies"
-              value={formData.allergies}
+              name="Allergies"
+              value={formData.Allergies}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
 
@@ -224,37 +196,22 @@ const PatientForm = () => {
             </label>
             <input
               type="text"
-              name="medications"
-              value={formData.medications}
+              name="CurrentMedications"
+              value={formData.CurrentMedications}
               onChange={handleChange}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              disabled={!isEditing} // Disable input if not in edit mode
             />
           </div>
-
-          {/* Submit Button */}
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="w-full md:w-1/3 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg"
-            >
-              {isEditing ? t("patientForm.submit") : t("patientForm.edit")}
-            </button>
-          </div>
         </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full md:w-1/3 mt-6 bg-blue-700 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg"
+        >
+          {t("patientForm.submit")}
+        </button>
       </form>
-
-      {/* Edit Profile Button */}
-      {!isEditing && (
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={handleEdit}
-            className="text-white bg-blue-600 hover:bg-blue-700 font-semibold py-2 px-6 rounded-lg"
-          >
-            {t("patientForm.editProfile")}
-          </button>
-        </div>
-      )}
     </div>
   );
 };

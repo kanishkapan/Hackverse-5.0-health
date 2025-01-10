@@ -1,16 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
+import { api } from "../../axios.config.js";
 
 const ProfileNavbar = () => {
   const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [user, setUser] = useState(null); // State to store user data
 
-  // Mock user data - replace with actual user data
-  const user = {
-    name: "Dr. Sarah Wilson",
-    image: "/api/placeholder/40/40", // Placeholder for user profile image
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await api.get("/api/user/authcheck"); // Adjust API endpoint as needed
+        if (response.status === 200) {
+          const userData = response.data.user;
+          console.log(userData);
+          // Set the displayName directly in the user object
+          if (userData.role === "doctor") {
+            userData.displayName = `Dr. ${userData.name}`;
+          } else {
+            userData.displayName = userData.name;
+          }
+          setUser(userData); // Set the user data with displayName
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error.response?.data?.message || error.message);
+        alert("Failed to fetch user data. Please try again.");
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const response = await api.get("/api/user/logout"); // Adjust if it's a GET request
+      if (response.status === 200) {
+        console.log("Successfully logged out:", response.data.message);
+
+        // Clear any local authentication state if necessary
+        localStorage.removeItem("authToken");
+
+        // Redirect user to the login page
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error.response?.data?.message || error.message);
+      alert("Failed to log out. Please try again.");
+    }
   };
+
+  if (!user) {
+    return null; // Optionally show a loader or placeholder while user data is loading
+  }
 
   return (
     <div>
@@ -37,9 +79,6 @@ const ProfileNavbar = () => {
               <Link to="/contact">Contact</Link>
             </li>
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
               <Link to="/appointment">Appointment</Link>
             </li>
             <li className="hover:underline cursor-pointer hover:text-blue-300 transition duration-300">
@@ -56,7 +95,7 @@ const ProfileNavbar = () => {
               onClick={() => setIsProfileOpen(!isProfileOpen)}
               className="flex items-center space-x-2 bg-blue-800 px-3 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
             >
-              <span>{user.name}</span>
+              <span>{user.displayName}</span>
               <ChevronDown
                 size={16}
                 className={`transform transition-transform duration-200 ${
@@ -87,7 +126,7 @@ const ProfileNavbar = () => {
               </Link>
               <hr className="my-1" />
               <button
-                onClick={() => console.log("Logging out...")}
+                onClick={handleLogout}
                 className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               >
                 Log Out
